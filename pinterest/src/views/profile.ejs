@@ -1,0 +1,58 @@
+<%- include('./partials/header') -%>
+
+<div class="profile w-full min-h-screen pt-1">
+    <form id="uploadform" method="post" hidden action="/fileupload" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*">
+    </form>
+    <div class="profdets mt-10 flex flex-col items-center justify-center">
+        <div class="relative">
+            <span id="uploadicon" class="w-8 h-8 absolute bottom-0 right-0 rounded-full flex items-center justify-center bg-zinc-200 cursor-pointer">
+                <i class="text-zinc-800 ri-pencil-line"></i>
+            </span>
+            <div class="w-32 h-32 bg-zinc-200 rounded-full overflow-hidden">
+                <img class="w-full h-full object-cover" src="/images/uploads/<%= user.profileImage %>" alt="<%= user.name %>'s profile image">
+            </div>
+        </div>
+        <h1 class="text-3xl font-semibold mt-2">
+            <%= user.name %>
+        </h1>
+        <h3 class="text-md">@<%= user.username %></h3>
+        <% if (isAuthor) { %>
+            <div class="flex flex-col mt-5 space-y-2">
+                <a class="text-sm font-semibold bg-zinc-200 px-7 py-2 rounded-full text-center" href="/edit">Edit</a>
+                <a href="/add" class="px-5 py-2 rounded-lg bg-red-600 text-xs text-white font-semibold">Add New Post</a>
+            </div>
+        <% } %>
+    </div>
+    <div class="flex flex-col px-4 font-bold mt-5">
+        <h2 class="text-3xl capitalize pl-8">Upload Pins</h2>
+        <div class="cards flex flex-wrap gap-10 mt-10 px-10 ">
+            <% if (user.posts && user.posts.length > 0) { %>
+                <% user.posts.forEach(function(post) { %>
+                    <a href="/show/posts/<%= post._id %>" class="flex flex-col items-center">
+                        <div class="w-52 h-52 bg-zinc-200 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-fill" src="/images/uploads/<%= post.image %>" alt="Uploaded pin">
+                        </div>
+                        <h5 class="inline-block text-lg mt-2 font-semibold text-ellipsis max-w-[200px] overflow-hidden whitespace-nowrap">
+                            <%= post.title %>
+                        </h5>
+                    </a>
+                <% }); %>
+            <% } else { %>
+                <div class="text-gray-500">No uploaded pins yet.</div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector("#uploadicon").addEventListener('click', function () {
+        document.querySelector("#uploadform input").click();
+    });
+
+    document.querySelector('#uploadform input').addEventListener('change', function () {
+        document.querySelector('#uploadform').submit();
+    });
+</script>
+
+<%- include('./partials/footer') -%>

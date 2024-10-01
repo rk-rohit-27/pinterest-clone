@@ -1,0 +1,42 @@
+<%- include('./partials/header') -%>
+
+<div class="container mx-auto p-5">
+    <h1 class="text-3xl font-semibold mb-5">Search Results</h1>
+
+    <% if (results.users.length > 0 || results.posts.length > 0) { %>
+        <% if (results.users.length > 0) { %>
+            <h2 class="text-2xl font-semibold mb-4">Users</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% results.users.forEach(user => { %>
+                    <div class="border rounded-lg p-4 bg-white shadow hover:shadow-lg transition-shadow duration-200">
+                        <a href="/profile/<%= user._id %>" class="flex items-center">
+                            <div class="w-16 h-16 bg-zinc-200 rounded-full overflow-hidden">
+                                <img class="w-full h-full object-cover" src="/images/uploads/<%= user.profileImage || 'default-profile.png' %>" alt="<%= user.name %>'s profile image">
+                            </div>
+                            <div class="ml-4">
+                                <h2 class="text-xl capitalize font-semibold"><%= user.name %></h2>
+                                <h3 class="text-gray-600">@<%= user.username %></h3>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+
+        <% if (results.posts.length > 0) { %>
+            <h2 class="text-2xl font-semibold mb-4 mt-10">Posts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% results.posts.forEach(post => { %>
+                    <div class="">
+                        <a href="show/posts/<%= post._id %>">
+                            <img class="w-40 h-40 object-cover rounded-lg" src="/images/uploads/<%= post.image || 'default-post.png' %>" alt="<%= post.title %>">
+                            <h3 class="text-lg font-semibold mt-2"><%= post.title %></h3>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+        <% } %>
+    <% } else { %>
+        <p class="text-gray-500">No results found for "<%= searchTerm %>".</p>
+    <% } %>
+</div>

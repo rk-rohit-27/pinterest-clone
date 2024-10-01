@@ -1,0 +1,27 @@
+<%- include('./partials/header') -%>
+
+<div class="w-full h-screen bg-zinc-300 flex items-center justify-center">
+    <div class="w-96 bg-white px-16 py-10 rounded-[30px] shadow-lg">
+        <svg style="cursor:pointer" class="g_1 gUZ U9O kV m-auto mb-7" height="40" width="40" viewBox="0 0 24 24" aria-label="Pinterest" fill="#e60023" role="img">
+            <path d="M0 12a12 12 0 0 0 7.73 11.22 12 12 0 0 1 .03-3.57l1.4-5.94S8.8 13 8.8 11.94c0-1.66.96-2.9 2.16-2.9 1.02 0 1.51.77 1.51 1.68 0 1.03-.65 2.56-.99 3.98-.28 1.19.6 2.16 1.77 2.16 2.12 0 3.76-2.24 3.76-5.47 0-2.86-2.06-4.86-5-4.86a5.17 5.17 0 0 0-5.39 5.18c0 1.03.4 2.13.9 2.73q.12.17.08.34l-.34 1.36q-.06.31-.4.16c-1.49-.7-2.42-2.88-2.42-4.63 0-3.77 2.74-7.23 7.9-7.23 4.14 0 7.36 2.95 7.36 6.9 0 4.12-2.6 7.43-6.2 7.43-1.21 0-2.35-.63-2.74-1.37l-.74 2.84a14 14 0 0 1-1.55 3.23A12 12 0 1 0 0 12"></path>
+        </svg>
+        <h1 class="mb-10 text-3xl font-semibold text-zinc-700 text-center tracking-tighter leading-none">Create New Account</h1>
+
+        <% if (error) { %>
+            <p class="text-red-500 text-center"><%= error %></p>
+        <% } %>
+        
+        <form action="/register" method="post">
+            <input class="border-2 mt-2 rounded-md block w-full px-3 py-2" type="text" name="name" placeholder="Full Name" required>
+            <input id="username" class="border-2 mt-2 rounded-md block w-full px-3 py-2" type="text" name="username" placeholder="Username" required>
+            <input class="border-2 mt-2 rounded-md block w-full px-3 py-2" type="email" name="email" placeholder="Email" required>
+            <input class="border-2 mt-2 rounded-md block w-full px-3 py-2" type="password" name="password" placeholder="Password" required>
+            <input class="border-2 mt-5 block w-full px-3 py-2 bg-red-600 text-white rounded-full cursor-pointer" type="submit" value="Create New Account">
+
+            <p class="text-xs font-semibold text-zinc-700 mt-7 w-3/4 mx-auto">By continuing, you agree to Pinterest's Terms of Service and acknowledge you've read our Privacy Policy.</p>
+        </form>
+        <a class="inline-block mt-7 text-sm font-semibold text-zinc-700 text-center w-full" href="/">Already have an Account? Login</a>
+    </div>
+</div>
+
+<%- include('./partials/footer') -%>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pinterest</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/stylesheet/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+  <% if(nav===true){ %>
+    <div class="sticky top-0 bg-white w-full px-4 py-4 flex justify-between items-center z-10 md:px-10">
+      <a href="/feed" class="flex items-center">
+        <svg class="g_1 gUZ U9O kV h-6 w-6 sm:h-8 sm:w-8" viewBox="0 0 24 24" aria-label="Pinterest" fill="#e60023">
+          <path
+            d="M0 12a12 12 0 0 0 7.73 11.22 12 12 0 0 1 .03-3.57l1.4-5.94S8.8 13 8.8 11.94c0-1.66.96-2.9 2.16-2.9 1.02 0 1.51.77 1.51 1.68 0 1.03-.65 2.56-.99 3.98-.28 1.19.6 2.16 1.77 2.16 2.12 0 3.76-2.24 3.76-5.47 0-2.86-2.06-4.86-5-4.86a5.17 5.17 0 0 0-5.39 5.18c0 1.03.4 2.13.9 2.73q.12.17.08.34l-.34 1.36q-.06.31-.4.16c-1.49-.7-2.42-2.88-2.42-4.63 0-3.77 2.74-7.23 7.9-7.23 4.14 0 7.36 2.95 7.36 6.9 0 4.12-2.6 7.43-6.2 7.43-1.21 0-2.35-.63-2.74-1.37l-.74 2.84a14 14 0 0 1-1.55 3.23A12 12 0 1 0 0 12">
+          </path>
+        </svg>
+        <h1 class="text-sm sm:text-lg text-red-600 font-semibold ml-2">Pinterest</h1>
+      </a>
+      <form action="/search" method="get"
+        class="hidden items-center px-3 bg-zinc-100 rounded-full w-1/3 h-12 lg:w-2/4 md:flex">
+        <input class="pl-3 outline-0 bg-transparent w-full" type="search" name="q" placeholder="Search Here"
+          id="search-input">
+        <button type="submit" class="text-gray-600">
+          <svg aria-label="Search icon" fill="#767676" class="h-6 w-6" viewBox="0 0 24 24">
+            <path
+              d="M10 16a6 6 0 1 1 .01-12.01A6 6 0 0 1 10 16m13.12 2.88-4.26-4.26a10 10 0 1 0-4.24 4.24l4.26 4.26a3 3 0 1 0 4.24-4.24">
+            </path>
+          </svg>
+        </button>
+      </form>
+      <div class="hidden search-input">
+        <form action="/search" method="get"
+          class=" items-center px-3 bg-zinc-100 rounded-full absolute top-14 left-1/2 -translate-x-[50%] w-1/2 flex py-1 ">
+          <input class=" outline-0 bg-transparent w-full" type="search" name="q" placeholder="Search Here"
+            id="search-input">
+          <button type="submit" class="text-gray-600">
+            <svg aria-label="Search icon" fill="#767676" class="h-4 w-4" viewBox="0 0 24 24">
+              <path
+                d="M10 16a6 6 0 1 1 .01-12.01A6 6 0 0 1 10 16m13.12 2.88-4.26-4.26a10 10 0 1 0-4.24 4.24l4.26 4.26a3 3 0 1 0 4.24-4.24">
+              </path>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <div class="flex gap-3 sm:gap-5 items-center">
+        <button id="search-toggle"
+          class="text-gray-600 w-fit p-1.5 bg-zinc-100 flex rounded-full items-center justify-center md:hidden">
+          <svg aria-label="Search icon" fill="#767676" class="h-3 w-3 " viewBox="0 0 24 24">
+            <path
+              d="M10 16a6 6 0 1 1 .01-12.01A6 6 0 0 1 10 16m13.12 2.88-4.26-4.26a10 10 0 1 0-4.24 4.24l4.26 4.26a3 3 0 1 0 4.24-4.24">
+            </path>
+          </svg>
+        </button>
+        <a class="underline font-medium hover:text-red-600 text-xs  sm:text-sm" href="/profile">Profile</a>
+        <a class="underline font-medium hover:text-red-600 text-xs  sm:text-sm" href="/feed">Feed</a>
+        <a class="px-2 sm:px-3 py-1 sm:py-2 bg-red-600 text-white font-semibold rounded-full text-xs  sm:text-sm" href="/logout">Logout</a>
+      </div>
+    </div>
+    <% } %>
+
+      <script>
+        const searchToggle = document.getElementById('search-toggle');
+        const searchInput = document.querySelector('.search-input');
+        const inputField = document.getElementById('search-input');
+
+        searchToggle.addEventListener('click', () => {
+          // Toggle the visibility of the search input
+          if (searchInput.classList.contains('hidden')) {
+            searchInput.classList.remove('hidden');
+            inputField.focus(); // Focus on the input field
+            searchToggle.classList.add('hidden'); // Hide the toggle button
+          }
+        });
+
+        // Hide input field and show toggle button when clicking outside
+        document.addEventListener('click', (event) => {
+          if (!searchInput.contains(event.target) && !searchToggle.contains(event.target)) {
+            if (!searchInput.classList.contains('hidden')) {
+              searchInput.classList.add('hidden');
+              searchToggle.classList.remove('hidden'); // Show the toggle button
+            }
+          }
+        });
+      </script>
